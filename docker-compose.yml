@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=databasedocker
+      - MYSQL_ROOT_PASSWORD=senha
+    volumes:
+      - ./database/volumes:/var/lib/mysql
+    networks:
+      - rede_docker
+  backend:
+    image: openjdk:11
+    restart: always
+    volumes:
+      - ./backend/:/backend/
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    command: java -jar /backend/target/backend-0.0.1-SNAPSHOT.jar
+    networks:
+      - rede_docker
+  frontend:
+    image: nginx:1.13
+    restart: always
+    volumes:
+      - ./frontend/dist/frontend/:/usr/share/nginx/html
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+    networks:
+      - rede_docker
+
+networks:
+  rede_docker:
