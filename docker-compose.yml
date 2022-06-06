@@ -1,19 +1,20 @@
 version: '3.7'
 services:
   database:
-    image: mysql:5.7
+    build:
+      context: ./database/
+      dockerfile: Dockerfile
     restart: always
     ports:
       - 3306:3306
-    environment:
-      - MYSQL_DATABASE=databasedocker
-      - MYSQL_ROOT_PASSWORD=senha
     volumes:
       - ./database/volumes:/var/lib/mysql
     networks:
-      - rede_docker
+      - docker-sample-project-network
   backend:
-    image: openjdk:11
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
     restart: always
     volumes:
       - ./backend/:/backend/
@@ -21,20 +22,19 @@ services:
       - 8080:8080
     depends_on:
       - database
-    command: java -jar /backend/target/backend-0.0.1-SNAPSHOT.jar
     networks:
-      - rede_docker
+      - docker-sample-project-network
   frontend:
-    image: nginx:1.13
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
     restart: always
-    volumes:
-      - ./frontend/dist/frontend/:/usr/share/nginx/html
     ports:
       - 80:80
     depends_on:
       - backend
     networks:
-      - rede_docker
+      - docker-sample-project-network
 
 networks:
-  rede_docker:
+  docker-sample-project-network:

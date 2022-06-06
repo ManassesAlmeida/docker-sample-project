@@ -1,0 +1,8 @@
+FROM mysql:5.7
+
+WORKDIR /var/lib/mysql
+
+ENV MYSQL_DATABASE databasedocker
+ENV MYSQL_ROOT_PASSWORD senha
+
+EXPOSE 3306
