@@ -1,9 +1,11 @@
-package com.backend.api;
+package com.backend.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.entity.Product;
 import com.backend.repository.ProductRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/products")
 public class ProductRest {
@@ -25,7 +28,7 @@ public class ProductRest {
 	@GetMapping
 	public ResponseEntity<List<Product>> findAll(){
 		List<Product> products = productRepository.findAll();
-		return ResponseEntity.ok(products);
+		return ResponseEntity.ok(products == null || products.isEmpty() ? new ArrayList<>() : products);
 	}
 	
 	@PostMapping
