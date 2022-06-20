@@ -9,7 +9,7 @@ Passos para executar a aplicação:
     - No diretório <i>'docker-sample-project'</i> (diretório raiz) execute o comando: <code>docker-compose up -d</code>
 
 Link para visualizar o frontend em Angular: http://localhost:80/ <br>
-Link para visualizar a api em Java: http://localhost:8080/products <br>
+Link para visualizar a api em Java: http://localhost:8080/api/products <br>
 
 Para finalizar a execução dos containers execute o comando: <code>docker-compose down</code>
 
@@ -31,7 +31,7 @@ Passos para executar a aplicação:
     - Em seguida execute o container a partir da imagem criada, utilizando o comando: <code>docker container run --name=frontend --net=docker-sample-project-network -p 80:80 docker-sample-project-frontend</code>
 
 Link para visualizar o frontend em Angular: http://localhost:80/ <br>
-Link para visualizar a api em Java: http://localhost:8080/products <br>
+Link para visualizar a api em Java: http://localhost:8080/api/products <br>
 
 Para finalizar a execução dos containers execute os comandos: 
 - <code>docker container stop frontend</code>
